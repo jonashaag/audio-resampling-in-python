@@ -2,10 +2,9 @@ Comparison of audio resampling libraries. View the notebook: https://nbviewer.ju
 
 ### Best by quality
 
-1. Very good: `scikit.samplerate`/`scikits-samplerate`/`samplerate`/`libsamplerate`, `librosa`/`resampy`
-2. Good: `julius`
-3. Acceptable:  `lilfilter`, `torchaudio.transforms.Resample`
-3. Bad: `scipy.signal.resample`
+1. Very good: `scikit.samplerate`/`scikits-samplerate`/`samplerate`/`libsamplerate`, `librosa`/`resampy`, `julius`
+1. Acceptable: `lilfilter`, `torchaudio.transforms.Resample`
+1. Bad: `scipy.signal.resample`
 
 ### Best by speed
 
