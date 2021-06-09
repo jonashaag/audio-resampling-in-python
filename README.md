@@ -2,9 +2,17 @@ Comparison of audio resampling libraries. View the notebook: https://nbviewer.ju
 
 ### Best by quality
 
-1. Very good: `scikit.samplerate`/`scikits-samplerate`/`samplerate`/`libsamplerate`, `librosa`/`resampy`, `julius`
-1. Acceptable: `lilfilter`, `torchaudio.transforms.Resample`
-1. Bad: `scipy.signal.resample`
+1. Good:
+   - `scikit.samplerate`/`scikits-samplerate`/`samplerate`/`libsamplerate`
+   - `librosa`/`resampy` (`"kaiser_best"`)
+   - `julius`
+3. Acceptable:
+   - `nnresample`
+   - `lilfilter`
+   - `torchaudio` (`transforms.Resample` + `resample_waveform`)
+   - `librosa`/`resampy` (`"kaiser_fast"`)
+5. Bad:
+   - `scipy.signal.resample`
 
 ### Best by speed
 
@@ -12,16 +20,14 @@ Downsampling from 48 kHz to 44.1 kHz.
 
 | Library | Time on CPU | Time on GPU |
 | - | - | - |
-| `lilfilter` | 3.22 ms ± 378 µs | ? |
-| `scipy.signal.resample` | 4.41 ms ± 992 µs | no support |
-| `julius` | 15.5 ms ± 2.57 ms<sup>1</sup>  | ? |
-| `resampy` | 15.1 ms ± 359 µs (`"kaiser_fast"`) | no support |
-| `julius` | 22.1 ms ± 4.84 ms | ? |
-| `resampy` | 75.5 ms ± 3.75 ms (`"kaiser_best"`) | no support |
-| `torchaudio` | 110 ms ± 8.31 ms | ? |
-| `scikits.samplerate` | 145 ms ± 3.83 ms | no support |
-| `samplerate` | 155 ms ± 25.7 ms | no support |
-
-<small>
-<sup>1</sup>Upsampling 48 kHz -> 96 kHz. Julius' performance improves with large GCD(original sr, target sr). For GCD(48000, 44100) = 300, GCD(48000, 96000) = 48000.
-</small>
+| `soxr` | 1.16 ms | no support |
+| `scipy.signal.resample` | 2.42 ms | no support |
+| `lilfilter` | 4.23 ms | ? |
+| `torchaudio` (`transforms.Resample`) | 9.98 ms | ? |
+| `torchaudio` (`resample_waveform`) | 10 ms | ? |
+| `resampy` (`"kaiser_fast"`) | 10.5 ms | no support |
+| `nnresample` | 16 ms | no support |
+| `julius` | 16.2 ms | ? |
+| `resampy` (`"kaiser_best"`) | 44.8 ms | no support |
+| `scikits.samplerate` | 75.5 ms | no support |
+| `samplerate` | 76.8 ms | no support |
