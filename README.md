@@ -9,7 +9,7 @@ Comparison of audio resampling libraries. View the notebook: https://nbviewer.ju
 3. Acceptable:
    - `nnresample`
    - `lilfilter`
-   - `torchaudio` (`transforms.Resample` + `resample_waveform`)
+   - `torchaudio` (`transforms.Resample` + `functional.resample`)
    - `librosa`/`resampy` (`"kaiser_fast"`)
 5. Bad:
    - `scipy.signal.resample`
@@ -20,14 +20,14 @@ Downsampling from 48 kHz to 44.1 kHz.
 
 | Library | Time on CPU | Time on GPU |
 | - | - | - |
-| `soxr` | 1.16 ms | no support |
-| `scipy.signal.resample` | 2.42 ms | no support |
-| `lilfilter` | 4.23 ms | ? |
-| `torchaudio` (`transforms.Resample`) | 9.98 ms | ? |
-| `torchaudio` (`resample_waveform`) | 10 ms | ? |
-| `resampy` (`"kaiser_fast"`) | 10.5 ms | no support |
-| `nnresample` | 16 ms | no support |
-| `julius` | 16.2 ms | ? |
-| `resampy` (`"kaiser_best"`) | 44.8 ms | no support |
-| `scikits.samplerate` | 75.5 ms | no support |
-| `samplerate` | 76.8 ms | no support |
+| `torchaudio` (`transforms.Resample`) | 0.977 ms | ? |
+| `soxr` | 1.23 ms | no support |
+| `scipy.signal.resample` | 1.94 ms | no support |
+| `lilfilter` | 5.02 ms | ? |
+| `torchaudio` (`functional.resample`) | 10.7 ms | ? |
+| `julius` | 12.5 ms | ? |
+| `resampy` (`"kaiser_fast"`) | 12.7 ms | no support |
+| `nnresample` | 19.2 ms | no support |
+| `resampy` (`"kaiser_best"`) | 61.6 ms | no support |
+| `scikits.samplerate` | 84.6 ms | no support |
+| `samplerate` | 85.7 ms | no support |
